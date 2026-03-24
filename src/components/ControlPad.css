@@ -1,0 +1,57 @@
+.control-pad {
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-label {
+  align-self: flex-start;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+}
+
+.dpad-grid {
+  display: grid;
+  grid-template-areas: 
+    ". up ."
+    "left center right"
+    ". down .";
+  gap: 8px;
+}
+
+.dpad-btn {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.dpad-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.dpad-btn:active {
+  transform: scale(0.95);
+}
+
+.dpad-center {
+  grid-area: center;
+  width: 48px;
+  height: 48px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+}
