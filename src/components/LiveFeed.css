@@ -41,6 +41,56 @@
 .feed-actions {
   display: flex;
   gap: 16px;
+  align-items: center;
+}
+
+.ai-toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.ai-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ai-toggle-btn.active {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.4);
+  color: #00ff88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.ai-status-tag {
+  font-size: 9px;
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-left: 8px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  font-weight: 700;
+}
+
+.ai-active .video-viewport {
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.05);
+}
+
+.text-green {
+  color: #00ff88;
 }
 
 .video-viewport {

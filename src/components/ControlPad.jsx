@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { 
   ChevronUp, 
   ChevronDown, 
@@ -8,6 +8,8 @@ import {
 import './ControlPad.css';
 
 const ControlPad = () => {
+  const activeKeyRef = useRef(null);
+
   const sendCommand = async (action) => {
     try {
       await fetch('http://localhost:5000/command', {
@@ -20,6 +22,51 @@ const ControlPad = () => {
       console.error('Failed to send command:', err);
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Prevent repeat events
+      if (activeKeyRef.current === e.key) return;
+
+      let action = null;
+      switch (e.key) {
+        case 'ArrowUp':
+          action = 'FORWARD';
+          break;
+        case 'ArrowDown':
+          action = 'BACKWARD';
+          break;
+        case 'ArrowLeft':
+          action = 'LEFT';
+          break;
+        case 'ArrowRight':
+          action = 'RIGHT';
+          break;
+        default:
+          return;
+      }
+
+      if (action) {
+        activeKeyRef.current = e.key;
+        sendCommand(action);
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        activeKeyRef.current = null;
+        sendCommand('STOP');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const directions = [
     { id: 'up', icon: ChevronUp, gridArea: 'up', action: 'FORWARD' },
